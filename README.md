@@ -4,4 +4,4 @@ This is a simple Bootstrap random card generator which will show a random card f
 
 Preview:
 
-<img src="preview-random-card-generator" alt="preview for random card generator">
+<img src="preview-random-card-generator.JPG" alt="preview for random card generator">
