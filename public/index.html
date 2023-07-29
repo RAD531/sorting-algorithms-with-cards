@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Random Card Generator</title>
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css?v=1" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="text/javascript" src="js/app.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid text-center">
+
+    <div class="row">
+      <div class="row p-3 d-flex justify-content-center">
+        <div class="col-12 border rounded border border-dark" id="card" style="background: white;
+        width: 250px; height:300px; font-size: 60px;">
+          <div class="row h-100">
+            <div class="col-2 position-relative" id="card-top-left">
+
+            </div>
+            <div class="col-8 position-relative" id="card-suit">
+
+            </div>
+            <div class="col-2 position-relative" id="card-bottom-right">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row bg-light d-flex align-items-center justify-content-center m-0 pt-2 pb-2 ps-0 pe-0">
+        <div class="col-3">
+          <button type="button" class="btn btn-secondary" onclick="generateNewCard()">Generate New Card</button>
+        </div>
+
+        <div class="col-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="toggleTimer" id="toggleTimer" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              Generate new card every 10 seconds
+            </label>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="form-floating">
+            <input type="number" min="150" max="500" class="form-control" id="heightInput" placeholder="Change height in pixels">
+            <label for="floatingInput">Change height in pixels</label>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="form-floating">
+            <input type="number" min="150" max="500" class="form-control" id="widthInput" placeholder="Change width in pixels">
+            <label for="floatingInput">Change width in pixels</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-12">
+        Made with ❤️ by Ryan Daniels
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

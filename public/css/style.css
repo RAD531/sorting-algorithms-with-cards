@@ -1,0 +1,14 @@
+body {
+    background: #0e7e12;
+    box-sizing: border-box;
+}
+
+#card-suit-heart{
+    content: ' \2665';
+    color: red;
+}
+
+#card-suit-diamond{
+    content: ' \2665';
+    color: red;
+}
