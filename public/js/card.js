@@ -84,7 +84,7 @@ class Card {
         else if (suit === "diamond"){
             num = (num * 4) + 3;
         }
-        
+
         return num;
     }
 
@@ -377,8 +377,7 @@ class Card {
     };
 
     #createHTMLStructure = () => {
-        return `<div class="col-3 border rounded border border-dark m-2" id="card" style="background: white;
-        width: 150px; height:150px; font-size: 60px;">
+        return `<div class="col-3 border rounded border border-dark m-2" id="card" style="background: white; font-size: 60px;">
           <div class="row h-100">
             <div class="col-2 position-relative" id="card-top-left">
 

@@ -10,6 +10,8 @@ var cardArr = [];
 window.onload = () => {
   generateNewCards();
   sortButtonOnClick();
+  setChangeHeightAndWidth();
+  changeHeightAndWidth();
 };
 
 let generateNewCards = () => {
@@ -35,24 +37,16 @@ let generateNewCards = () => {
   }
 }
 
-let sortButtonOnClick = () =>{
-  document.getElementById("sortButton").addEventListener("click", function() {
+let sortButtonOnClick = () => {
+  document.getElementById("sortButton").addEventListener("click", function () {
     let sortOption = document.getElementById("sortOptionSet").value;
 
-    if (sortOption === "Selection Sort"){
+    if (sortOption === "Selection Sort") {
       selectionSort();
     }
 
-    else if (sortOption === "Bubble Sort"){
+    else if (sortOption === "Bubble Sort") {
       bubbleSort();
-    }
-
-    else if (sortOption === "Quick Sort"){
-
-    }
-
-    else if (sortOption === "Insertion Sort"){
-
     }
   })
 };
@@ -63,7 +57,6 @@ let selectionSort = () => {
   }
 
   let arr = cardArr.slice();
-  console.log(JSON.stringify(cardArr));
 
   let rowParent = document.getElementById("card-populate-sort");
   rowParent.innerHTML = "";
@@ -72,19 +65,31 @@ let selectionSort = () => {
   rowChild.className = "row p-3 d-flex justify-content-center";
   rowChild.id = "onHover";
 
+  let headingIndex = document.createElement("h5");
+  headingIndex.className = "text-light";
+  rowChild.append(headingIndex);
+
   for (card of arr) {
     rowChild.innerHTML += card.getHTML().innerHTML;
   }
 
+  let count = 0;
   let min = 0;
   while (min < arr.length - 1) {
     for (let i = min + 1; i < arr.length; i++) {
       if (arr[min].getIndexNumber() > arr[i].getIndexNumber()) {
 
+        count++;
         sortSwap(arr, min, i);
 
         let newRowChild = rowChild.cloneNode(true);
+        newRowChild.removeChild(newRowChild.firstChild);
+
         sortSwapNode(newRowChild, min, i);
+
+        let headingIndexClone = headingIndex.cloneNode(true); // Create a new deep clone of the heading element
+        headingIndexClone.innerHTML = "Iteration " + count; // Set the innerHTML of the cloned heading element
+        newRowChild.insertBefore(headingIndexClone, newRowChild.firstChild);
 
         rowChild = newRowChild.cloneNode(true);
         rowParent.appendChild(newRowChild);
@@ -101,7 +106,6 @@ let bubbleSort = () => {
   }
 
   let arr = cardArr.slice();
-  console.log(JSON.stringify(cardArr));
 
   let rowParent = document.getElementById("card-populate-sort");
   rowParent.innerHTML = "";
@@ -110,20 +114,31 @@ let bubbleSort = () => {
   rowChild.className = "row p-3 d-flex justify-content-center";
   rowChild.id = "onHover";
 
+  let headingIndex = document.createElement("h5");
+  headingIndex.className = "text-light";
+  rowChild.append(headingIndex);
+
   for (card of arr) {
     rowChild.innerHTML += card.getHTML().innerHTML;
   }
-  
+
+  let count = 0;
   let wall = arr.length - 1; //we start the wall at the end of the array
   while (wall > 0) {
     let index = 0;
     while (index < wall) {
       //compare the adjacent positions, if the right one is bigger, we have to swap
       if (arr[index].getIndexNumber() > arr[index + 1].getIndexNumber()) {
+        count++;
         sortSwap(arr, index, index + 1);
 
         let newRowChild = rowChild.cloneNode(true);
+        newRowChild.removeChild(newRowChild.firstChild);
         sortSwapNode(newRowChild, index, index + 1);
+
+        let headingIndexClone = headingIndex.cloneNode(true); // Create a new deep clone of the heading element
+        headingIndexClone.innerHTML = "Iteration " + count; // Set the innerHTML of the cloned heading element
+        newRowChild.insertBefore(headingIndexClone, newRowChild.firstChild);
 
         rowChild = newRowChild.cloneNode(true);
         rowParent.appendChild(newRowChild);
@@ -134,13 +149,13 @@ let bubbleSort = () => {
   }
 };
 
-let sortSwap = (arr, value1, value2) =>{
+let sortSwap = (arr, value1, value2) => {
   let aux = arr[value1];
   arr[value1] = arr[value2];
   arr[value2] = aux;
 }
 
-let sortSwapNode = (parent, node1Index, node2Index) =>{
+let sortSwapNode = (parent, node1Index, node2Index) => {
   let node1 = parent.childNodes[node1Index];
   let node2 = parent.childNodes[node2Index];
 
@@ -148,4 +163,63 @@ let sortSwapNode = (parent, node1Index, node2Index) =>{
   parent = node2.parentNode;
   node1.replaceWith(node2);
   parent.insertBefore(node1, afterNode2);
+}
+
+let setChangeHeightAndWidth = () => {
+  document.documentElement.style.setProperty('--cardHeight', "150px");
+  document.documentElement.style.setProperty('--cardWidth', "150px");
+  document.documentElement.style.setProperty('--spanFontSize', "20px");
+}
+
+let changeHeightAndWidth = () => {
+
+  document.getElementById("heightInput").addEventListener("input", function (e) {
+    height = e.target.value;
+    if (height < 150) {
+      height = 150;
+    }
+
+    else if (height > 500) {
+      height = 500;
+    }
+
+    height = height + "px";
+    document.documentElement.style.setProperty('--cardHeight', `${height}`);
+
+    changeSpanFontSize();
+  });
+
+  document.getElementById("widthInput").addEventListener("input", function (e) {
+    width = e.target.value;
+    if (width < 150) {
+      width = 150;
+    }
+
+    else if (width > 500) {
+      width = 500;
+    }
+
+    width = width + "px";
+    document.documentElement.style.setProperty('--cardWidth', `${width}`);
+
+    changeSpanFontSize();
+  });
+
+};
+
+let changeSpanFontSize = () => {
+  let cardElement = document.getElementById('card');
+  let height = getComputedStyle(cardElement).getPropertyValue('--cardHeight');
+  let width = getComputedStyle(cardElement).getPropertyValue('--cardWidth');
+
+  height = parseInt(height);
+  width = parseInt(width);
+
+  let fontSize = width * height * 0.0005;
+
+  if (fontSize > 60) {
+    fontSize = 60;
+  }
+
+  document.documentElement.style.setProperty('--spanFontSize', `${fontSize + "px"}`);
 }
