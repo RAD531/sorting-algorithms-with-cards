@@ -12,3 +12,7 @@ body {
     content: ' \2665';
     color: red;
 }
+
+#card-populate-sort #onHover:hover{
+    background-color: rgba(128, 128, 128, 0.5);
+}
