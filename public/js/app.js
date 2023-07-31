@@ -9,6 +9,7 @@ var cardArr = [];
 
 window.onload = () => {
   generateNewCards();
+  sortButtonOnClick();
 };
 
 let generateNewCards = () => {
@@ -34,10 +35,35 @@ let generateNewCards = () => {
   }
 }
 
+let sortButtonOnClick = () =>{
+  document.getElementById("sortButton").addEventListener("click", function() {
+    let sortOption = document.getElementById("sortOptionSet").value;
+
+    if (sortOption === "Selection Sort"){
+      selectionSort();
+    }
+
+    else if (sortOption === "Bubble Sort"){
+      bubbleSort();
+    }
+
+    else if (sortOption === "Quick Sort"){
+
+    }
+
+    else if (sortOption === "Insertion Sort"){
+
+    }
+  })
+};
+
 let selectionSort = () => {
   if (cardArr.length < 2) {
     return;
   }
+
+  let arr = cardArr.slice();
+  console.log(JSON.stringify(cardArr));
 
   let rowParent = document.getElementById("card-populate-sort");
   rowParent.innerHTML = "";
@@ -46,28 +72,19 @@ let selectionSort = () => {
   rowChild.className = "row p-3 d-flex justify-content-center";
   rowChild.id = "onHover";
 
-  for (card of cardArr) {
+  for (card of arr) {
     rowChild.innerHTML += card.getHTML().innerHTML;
   }
 
   let min = 0;
-  while (min < cardArr.length - 1) {
-    for (let i = min + 1; i < cardArr.length; i++) {
-      if (cardArr[min].getIndexNumber() > cardArr[i].getIndexNumber()) {
+  while (min < arr.length - 1) {
+    for (let i = min + 1; i < arr.length; i++) {
+      if (arr[min].getIndexNumber() > arr[i].getIndexNumber()) {
 
-
-        let aux = cardArr[min];
-        cardArr[min] = cardArr[i];
-        cardArr[i] = aux;
+        sortSwap(arr, min, i);
 
         let newRowChild = rowChild.cloneNode(true);
-        let node1 = newRowChild.childNodes[min];
-        let node2 = newRowChild.childNodes[i];
-
-        const afterNode2 = node2.nextElementSibling;
-        const parent = node2.parentNode;
-        node1.replaceWith(node2);
-        parent.insertBefore(node1, afterNode2);
+        sortSwapNode(newRowChild, min, i);
 
         rowChild = newRowChild.cloneNode(true);
         rowParent.appendChild(newRowChild);
@@ -83,6 +100,9 @@ let bubbleSort = () => {
     return;
   }
 
+  let arr = cardArr.slice();
+  console.log(JSON.stringify(cardArr));
+
   let rowParent = document.getElementById("card-populate-sort");
   rowParent.innerHTML = "";
 
@@ -90,28 +110,20 @@ let bubbleSort = () => {
   rowChild.className = "row p-3 d-flex justify-content-center";
   rowChild.id = "onHover";
 
-  for (card of cardArr) {
+  for (card of arr) {
     rowChild.innerHTML += card.getHTML().innerHTML;
   }
   
-  let wall = cardArr.length - 1; //we start the wall at the end of the array
+  let wall = arr.length - 1; //we start the wall at the end of the array
   while (wall > 0) {
     let index = 0;
     while (index < wall) {
       //compare the adjacent positions, if the right one is bigger, we have to swap
-      if (cardArr[index].getIndexNumber() > cardArr[index + 1].getIndexNumber()) {
-        let aux = cardArr[index];
-        cardArr[index] = cardArr[index + 1];
-        cardArr[index + 1] = aux;
+      if (arr[index].getIndexNumber() > arr[index + 1].getIndexNumber()) {
+        sortSwap(arr, index, index + 1);
 
         let newRowChild = rowChild.cloneNode(true);
-        let node1 = newRowChild.childNodes[index];
-        let node2 = newRowChild.childNodes[index + 1];
-
-        const afterNode2 = node2.nextElementSibling;
-        const parent = node2.parentNode;
-        node1.replaceWith(node2);
-        parent.insertBefore(node1, afterNode2);
+        sortSwapNode(newRowChild, index, index + 1);
 
         rowChild = newRowChild.cloneNode(true);
         rowParent.appendChild(newRowChild);
@@ -121,3 +133,19 @@ let bubbleSort = () => {
     wall--; //decrease the wall for optimization
   }
 };
+
+let sortSwap = (arr, value1, value2) =>{
+  let aux = arr[value1];
+  arr[value1] = arr[value2];
+  arr[value2] = aux;
+}
+
+let sortSwapNode = (parent, node1Index, node2Index) =>{
+  let node1 = parent.childNodes[node1Index];
+  let node2 = parent.childNodes[node2Index];
+
+  const afterNode2 = node2.nextElementSibling;
+  parent = node2.parentNode;
+  node1.replaceWith(node2);
+  parent.insertBefore(node1, afterNode2);
+}

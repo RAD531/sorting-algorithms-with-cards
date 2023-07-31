@@ -32,29 +32,38 @@
       </div>
 
       <div class="row bg-light d-flex align-items-center justify-content-center m-0 pt-2 pb-2 ps-0 pe-0">
-        <div class="col-2">
+        <div class="col-4 p-3">
           <button type="button" class="btn btn-secondary" onclick="generateNewCards()">Generate New Card</button>
         </div>
 
-        <div class="col-2">
-          <button type="button" class="btn btn-secondary" onclick="bubbleSort()">Selection Sort</button>
+        <div class="col-4 p-3">
+          <select class="form-select" id="sortOptionSet">
+            <option value="Selection Sort">Selection Sort</option>
+            <option value="Bubble Sort">Bubble Sort</option>
+            <option value="Quick Sort">Quick Sort</option>
+            <option value="Insertion Sort">Insertion Sort</option>
+          </select>
         </div>
 
-        <div class="col-2">
+        <div class="col-4 p-3">
+          <button type="button" class="btn btn-secondary" id="sortButton">Sort</button>
+        </div>
+
+        <div class="col-4 p-3">
           <div class="form-floating">
             <input type="number" min="1" max="200" class="form-control" id="numOfCards" placeholder="Number of cards to display">
             <label for="floatingInput">Number of cards to display</label>
           </div>
         </div>
 
-        <div class="col-2">
+        <div class="col-4 p-3">
           <div class="form-floating">
             <input type="number" min="150" max="500" class="form-control" id="heightInput" placeholder="Change height in pixels">
             <label for="floatingInput">Change height in pixels</label>
           </div>
         </div>
 
-        <div class="col-2">
+        <div class="col-4 p-3">
           <div class="form-floating">
             <input type="number" min="150" max="500" class="form-control" id="widthInput" placeholder="Change width in pixels">
             <label for="floatingInput">Change width in pixels</label>
@@ -65,7 +74,7 @@
 
     <div class="row mt-5 ms-5 me-5">
       <div class="col-12">
-        <h4>Selection Sort:</h4>
+        <h4 class="text-light">Selection Sort:</h4>
       </div>
     </div>
 
