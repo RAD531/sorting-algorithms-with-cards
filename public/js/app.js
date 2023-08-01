@@ -57,24 +57,10 @@ let selectionSort = () => {
   }
 
   let arr = cardArr.slice();
-
-  let rowParent = document.getElementById("card-populate-sort");
-  rowParent.innerHTML = "";
-
-  let rowChild = document.createElement("div");
-  rowChild.className = "row p-3 d-flex justify-content-center";
-  rowChild.id = "onHover";
-
-  let headingIndex = document.createElement("h5");
-  headingIndex.className = "text-light";
-  rowChild.append(headingIndex);
-
-  for (card of arr) {
-    rowChild.innerHTML += card.getHTML().innerHTML;
-  }
-
+  let { rowParent, rowChild, headingIndex } = createRowElements(arr);
   let count = 0;
   let min = 0;
+
   while (min < arr.length - 1) {
     for (let i = min + 1; i < arr.length; i++) {
       if (arr[min].getIndexNumber() > arr[i].getIndexNumber()) {
@@ -101,29 +87,15 @@ let selectionSort = () => {
 
 let bubbleSort = () => {
 
-  if (cardArr.length < 2) {
+    if (cardArr.length < 2) {
     return;
   }
 
   let arr = cardArr.slice();
-
-  let rowParent = document.getElementById("card-populate-sort");
-  rowParent.innerHTML = "";
-
-  let rowChild = document.createElement("div");
-  rowChild.className = "row p-3 d-flex justify-content-center";
-  rowChild.id = "onHover";
-
-  let headingIndex = document.createElement("h5");
-  headingIndex.className = "text-light";
-  rowChild.append(headingIndex);
-
-  for (card of arr) {
-    rowChild.innerHTML += card.getHTML().innerHTML;
-  }
-
+  let { rowParent, rowChild, headingIndex } = createRowElements(arr);
   let count = 0;
   let wall = arr.length - 1; //we start the wall at the end of the array
+  
   while (wall > 0) {
     let index = 0;
     while (index < wall) {
@@ -147,6 +119,27 @@ let bubbleSort = () => {
     }
     wall--; //decrease the wall for optimization
   }
+};
+
+let createRowElements = (arr) => {
+  let rowParent = document.getElementById("card-populate-sort");
+  rowParent.innerHTML = "";
+
+  let rowChild = document.createElement("div");
+  rowChild.className = "row p-3 d-flex justify-content-center";
+  rowChild.id = "onHover";
+
+  let headingIndex = document.createElement("h5");
+  headingIndex.className = "text-light";
+  rowChild.append(headingIndex);
+
+  for (card of arr) {
+    rowChild.innerHTML += card.getHTML().innerHTML;
+  }
+
+  rowParent.appendChild(rowChild);
+
+  return { rowParent, rowChild, headingIndex };
 };
 
 let sortSwap = (arr, value1, value2) => {

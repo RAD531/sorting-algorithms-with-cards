@@ -1,6 +1,6 @@
 # Random Card Generator
 
-This is a simple Bootstrap random card generator which will show a random card from a deck of cards. You can optionally set the height and width of the card and set a new random every 10 seconds.
+This is a simple Bootstrap random card generator which can sort the cards in ascending and descending order using either bubble sort or selection sort.
 
 Preview:
 
