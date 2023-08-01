@@ -40,18 +40,21 @@ let generateNewCards = () => {
 let sortButtonOnClick = () => {
   document.getElementById("sortButton").addEventListener("click", function () {
     let sortOption = document.getElementById("sortOptionSet").value;
+    let lessOrGreterThan = document.getElementById("sortAscenDescen").value;
 
     if (sortOption === "Selection Sort") {
-      selectionSort();
+      document.getElementById("sortHeading").innerHTML = "Selection Sort:";
+      selectionSort(lessOrGreterThan);
     }
 
     else if (sortOption === "Bubble Sort") {
-      bubbleSort();
+      document.getElementById("sortHeading").innerHTML = "Bubble Sort:";
+      bubbleSort(lessOrGreterThan);
     }
   })
 };
 
-let selectionSort = () => {
+let selectionSort = (lessOrGreterThan) => {
   if (cardArr.length < 2) {
     return;
   }
@@ -63,7 +66,7 @@ let selectionSort = () => {
 
   while (min < arr.length - 1) {
     for (let i = min + 1; i < arr.length; i++) {
-      if (arr[min].getIndexNumber() > arr[i].getIndexNumber()) {
+      if (lessOrGreterThan === "Ascending" ? arr[min].getIndexNumber() > arr[i].getIndexNumber() : arr[min].getIndexNumber() < arr[i].getIndexNumber()) {
 
         count++;
         sortSwap(arr, min, i);
@@ -85,7 +88,7 @@ let selectionSort = () => {
   }
 };
 
-let bubbleSort = () => {
+let bubbleSort = (lessOrGreterThan) => {
 
     if (cardArr.length < 2) {
     return;
@@ -100,7 +103,7 @@ let bubbleSort = () => {
     let index = 0;
     while (index < wall) {
       //compare the adjacent positions, if the right one is bigger, we have to swap
-      if (arr[index].getIndexNumber() > arr[index + 1].getIndexNumber()) {
+      if (lessOrGreterThan === "Ascending" ? arr[index].getIndexNumber() > arr[index + 1].getIndexNumber() : arr[index].getIndexNumber() < arr[index + 1].getIndexNumber()) {
         count++;
         sortSwap(arr, index, index + 1);
 
